@@ -2,6 +2,11 @@
 Hi! This is a production ready **Candy Machine V3** responsive UI which can be easily customized.
 Major features of the CMv3 such as Candy Guards are implemented & auto-detected.
 
+#### IMPORTANT: Use of Sugar CLI with this UI
+To deploy a Candy Machine using Sugar, be sure to use the version that creates account version v1 Candy Machines. The latest sugar version as of updating this readME (29/04/2023) that supports account version 1 CMs, and this UI is [sugar v2.0.0-beta.2](https://github.com/metaplex-foundation/sugar/releases/tag/v2.0.0-beta.2).
+
+Will look into adding functionality for CMv3 Account version v2 (which supports pNFT, royalty enforcement).
+
 ### Preview
 ![Desktop preview of Candy Machine V3](https://cdn.discordapp.com/attachments/1039648022516215919/1072170298398474250/cmv3.png)
 — Desktop preview.
@@ -104,5 +109,8 @@ Want to customize the color scheme? This frontend uses 6 main colors that can be
 ![Candy Machine V3 with Address Gate, Allow List or other similar guards](https://cdn.discordapp.com/attachments/1039648022516215919/1072171559520833656/privatecmv3.png)
 — Candy Machine V3 with Address Gate, Allow List or other similar guards
 
-## Feedback/Collaborating/Support
-If you have any feedback, want to collaborate or need support, please submit an issue through [Github Issues](https://github.com/wearekite/candy-machine-v3-ui/issues).
+## Collaborating
+Want to collaborate and make the repo better? Feel free to submit a pull request to the main branch.
+
+## Feedback/Support
+If you have any feedback or need support, please submit an issue through [Github Issues](https://github.com/wearekite/candy-machine-v3-ui/issues).
