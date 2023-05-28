@@ -23,6 +23,8 @@ import { websiteURL } from "./config";
 import { twitterURL } from "./config";
 import { discordURL } from "./config";
 
+import { crossmintID } from "./config";
+
 import { MultiMintButton } from "./MultiMintButton";
 //import { MintButton } from "./MintButton";
 import {
@@ -40,6 +42,7 @@ import {
   NftPaymentMintSettings,
   ParsedPricesForUI,
 } from "./hooks/types";
+import { CrossmintPayButton } from "@crossmint/client-sdk-react-ui";
 import { guardToLimitUtil } from "./hooks/utils";
 
 const BorderLinearProgress = styled(LinearProgress)`
@@ -346,7 +349,7 @@ export interface HomeProps {
 const candyMachinOps = {
   allowLists: [
     {
-      list: require("../cmv3-demo-initialization/allowlist.json"),
+      list: require("./constants/allowlist.json"),
       groupLabel: "waoed",
     },
   ],
@@ -646,7 +649,7 @@ const Home = (props: HomeProps) => {
                 ) : !guardStates.isWalletWhitelisted ? (
                   <PrivateWrap>
                   <PrivateText>Mint is private</PrivateText>
-                  <PrivateSubtext>You’re currently not allowed to mint. Try again at a later time.</PrivateSubtext>
+                  <PrivateSubtext>You are currently not allowed to mint. Try again at a later time.</PrivateSubtext>
                   </PrivateWrap>
                 ) : (
                   <>
@@ -678,7 +681,18 @@ const Home = (props: HomeProps) => {
                     </>
                   </>
                 )}
-
+                  <>
+                  <CrossmintPayButton
+                    clientId={crossmintID}
+                    environment="staging"
+                    mintConfig={{
+                    type: "candy-machine",
+                    quantity: 1, // The amount of NFTs you would like to mint per order.
+                    // mintingGroup: "_MINTING_GROUP_" // only if you have configured minting groups in candy guards
+                    locale: "en-US",
+                    currency: "EUR"
+                    }} />
+                  </>
                 <ProgressbarWrap>
                 {guardStates.isStarted && wallet.publicKey && (
                   <MintCount>
