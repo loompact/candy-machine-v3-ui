@@ -24,6 +24,7 @@ import { twitterURL } from "./config";
 import { discordURL } from "./config";
 
 import { crossmintID } from "./config";
+import { crossmintNET } from "./config";
 
 import { MultiMintButton } from "./MultiMintButton";
 //import { MintButton } from "./MintButton";
@@ -643,7 +644,7 @@ const Home = (props: HomeProps) => {
                     }}
                   />
                 ) : !wallet?.publicKey ? (
-                  <ConnectWallet>Connect Wallet</ConnectWallet>
+                  <ConnectWallet>Got an existing wallet? Press here to connect...</ConnectWallet>
                   // ) : !guardStates.canPayFor ? (
                   //   <h1>You cannot pay for the mint</h1>
                 ) : !guardStates.isWalletWhitelisted ? (
@@ -684,13 +685,14 @@ const Home = (props: HomeProps) => {
                   <>
                   <CrossmintPayButton
                     clientId={crossmintID}
-                    environment="staging"
+                    className="xmint-btn"
+                    environment={crossmintNET}
+                    locale="en-US"
+                    currency="EUR"
                     mintConfig={{
                     type: "candy-machine",
-                    quantity: 1, // The amount of NFTs you would like to mint per order.
+                    quantity: 1 // The amount of NFTs you would like to mint per order.
                     // mintingGroup: "_MINTING_GROUP_" // only if you have configured minting groups in candy guards
-                    locale: "en-US",
-                    currency: "EUR"
                     }} />
                   </>
                 <ProgressbarWrap>

@@ -43,3 +43,6 @@ export const discordURL =
 
 export const crossmintID =
   process.env.NEXT_PUBLIC_CROSSMINT_ID || null;
+
+export const crossmintNET =
+process.env.NEXT_PUBLIC_CROSSMINT_NET || null;

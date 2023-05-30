@@ -58,7 +58,7 @@ export const CTAButton = styled.button`
   border: none;
   font-style: normal;
   font-weight: 600;
-  font-size: 20px;
+  font-size: 16px;
   line-height: 150%;
   text-transform: uppercase;
   background: none;
@@ -343,7 +343,7 @@ export const MultiMintButton = ({
             ) : isMinting || loading ? (
               "PLEASE WAIT, MINT IN PROGRESS"
             ) : (
-              "MINT"
+              "PREES HERE TO MINT WITH EXISTING WALLET"
             )
           ) : isEnded ? (
             "ENDED"
