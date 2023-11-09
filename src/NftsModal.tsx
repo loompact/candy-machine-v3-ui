@@ -23,7 +23,7 @@ export const Action = styled.button`
   padding: 10px 16px;
   gap: 10px;
   background: var(--primary);
-  border-radius: 4px;
+  border-radius: 10px;
   border: none;
   font-style: normal;
   font-weight: 700;
@@ -37,7 +37,7 @@ export const Action = styled.button`
   :hover {
     border: none;
     outline: none !important;
-    background: #d09a69;
+    background: #4bb688;
   }
   :not(disabled) {
     cursor: pointer;
@@ -86,10 +86,10 @@ export default function NftsModal({
                     {nft.json.image && (
                       <CardMedia
                         component="img"
-                        //   alt="Contemplative Reptile"
-                        //   height="140"
+                        width="200"
+                        height="200"
+                        style={{ objectFit: 'contain' }}
                         image={nft.json.image}
-                        //   title="Contemplative Reptile"
                       />
                     )}
                     <CardContent>
@@ -108,19 +108,10 @@ export default function NftsModal({
                         </Typography>
                       )}
                     </CardContent>
-                    <CardContent>
-                      {nft.json.attributes?.map(({ trait_type, value }) => (
-                        <Chip
-                          label={`${trait_type}: ${value}`}
-                          variant="outlined"
-                          key={trait_type}
-                          style={{margin: 2}}
-                        />
-                      ))}
-                    </CardContent>
+
                   </CardActionArea>
                   <CardActions >
-                    <Action style={{width: "100%"}} onClick={() => openOnSolscan(nft.address.toString())}>View on solscan</Action>
+                    <Action style={{width: "100%"}} onClick={() => openOnSolscan(nft.address.toString())}>View NFT data on solscan</Action>
                   </CardActions>
                 </Card>
               </Grid>

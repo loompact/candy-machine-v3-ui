@@ -1,9 +1,9 @@
-import { CircularProgress } from "@material-ui/core";
+// import { CircularProgress } from "@material-ui/core";
 // import Button from "@material-ui/core/Button";
 import { CandyMachine } from "@metaplex-foundation/js";
 import { useEffect, useMemo, useRef, useState } from "react";
 import styled from "styled-components";
-import { useConnection, useWallet } from "@solana/wallet-adapter-react";
+// import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import { PublicKey } from "@solana/web3.js";
 import { GatewayStatus, useGateway } from "@civic/solana-gateway-react";
 import { GuardGroupStates, ParsedPricesForUI, PaymentRequired } from "./hooks/types";
@@ -49,24 +49,26 @@ const PlusIcon = (props) => (
 
 export const CTAButton = styled.button`
   width: 100%;
-  padding: 0;
+  padding: 5px 4px;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
+  background-color: #2d6e52;
   color: var(--white);
   cursor: pointer;
+  border-radius: 10px;
   border: none;
   font-style: normal;
   font-weight: 600;
-  font-size: 20px;
+  font-size: 16px;
   line-height: 150%;
   text-transform: uppercase;
-  background: none;
 `;
 export const ButtonWrap = styled.div`
-  padding: 16px 24px;
-  background-color: var(--primary);
-  border-radius: 4px;
+  width: 400px;
+  padding: 5px 4px;
+  background-color: #3b8c69;
+  border-radius: 10px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -105,13 +107,13 @@ export const NumberInput = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding: 16px;
-  gap: 20px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 6px;
+  padding: 15px;
+  gap: 5px;
+  background: none;
+  border-radius: 10px;
 `
 export const NumericField = styled.input`
-  font-size: 20px !important;
+  font-size: 20px;
   padding: 0;
   vertical-align: middle;
   background-color: none;
@@ -143,14 +145,14 @@ export const NumericField = styled.input`
 export const EstimatedCost = styled.p`
   font-style: normal;
   font-weight: 400;
-  font-size: 16px;
+  font-size: 12px;
   line-height: 150%;
   color: var(--white);
   text-transform: none;
   text-align: left;
 
   @media only screen and (max-width: 450px) {
-    font-size: 12px;
+    font-size: 10px;
   }
 `
 function usePrevious<T>(value: T): T | undefined {
@@ -203,8 +205,8 @@ export const MultiMintButton = ({
         (prices.payment
           .filter(({ kind }) => kind === "sol")
           .reduce((a, { price }) => a + price, 0) +
-          0.012)
-        : 0.012,
+          0.022)
+        : 0.022,
     [mintCount, prices]
   );
   const totalTokenCosts = useMemo((): PaymentRequired[] => {
@@ -228,7 +230,7 @@ export const MultiMintButton = ({
   }, [mintCount, prices]);
   const totalTokenCostsString = useMemo(() => {
     return totalTokenCosts.reduce(
-      (text, price) => `${text} + ${price.price} ${tokenType}`,
+      (text, price) => `${text} ${price.price} ${tokenType}`,
       ""
     );
   }, [totalTokenCosts]);
@@ -261,7 +263,7 @@ export const MultiMintButton = ({
     var numericField = document.querySelector(".mint-qty") as HTMLInputElement;
     if (numericField) {
       var value = parseInt(numericField.value);
-      if (!isNaN(value) && value < 10) {
+      if (!isNaN(value) && value < 5) {
         value++;
         numericField.value = "" + value;
         updateAmounts(value);
@@ -284,8 +286,8 @@ export const MultiMintButton = ({
   function updateMintCount(target: any) {
     var value = parseInt(target.value);
     if (!isNaN(value)) {
-      if (value > 10) {
-        value = 10;
+      if (value > 5) {
+        value = 5;
         target.value = "" + value;
       } else if (value < 1) {
         value = 1;
@@ -310,7 +312,7 @@ export const MultiMintButton = ({
     [loading, isSoldOut, isMinting, isEnded, !isActive]
   );
   return (
-    <div className="w-100">
+    <div className="w-100" align="center">
       <div className="w-100">
         <ButtonWrap>
         <CTAButton
@@ -341,9 +343,9 @@ export const MultiMintButton = ({
             mintCount > limit ? (
               "LIMIT REACHED"
             ) : isMinting || loading ? (
-              "PLEASE WAIT, MINT IN PROGRESS"
+              "MINTING IN PROGRESS (MIGHT TAKE SOME MINUTES!)"
             ) : (
-              "MINT"
+              "MINT (BUY WITH WALLET+CRYPTO)"
             )
           ) : isEnded ? (
             "ENDED"
@@ -353,21 +355,20 @@ export const MultiMintButton = ({
 
           {!isSoldOut && isActive && (
         <EstimatedCost>
-          Estimated costs: {costSolUI(totalSolCost)} SOL
-          {totalTokenCostsString}
+          Estimated costs: {totalTokenCostsString} + approx. {costSolUI(totalSolCost)} SOL
+          
         </EstimatedCost>
         )}
         </CTAButton>
 
           <NumberInput>
           <NumbericIcon
-            disabled={disabled || mintCount <= 1}
             onClick={() => decrementValue()}
           >
             <MinusIcon></MinusIcon>
           </NumbericIcon>
           <NumericField
-            disabled={disabled}
+            disabled
             type="number"
             className="mint-qty"
             step={1}
@@ -377,7 +378,6 @@ export const MultiMintButton = ({
             onChange={(e) => updateMintCount(e.target as any)}
           />
           <NumbericIcon
-            disabled={disabled || limit <= mintCount}
             onClick={() => incrementValue()}
           >
             <PlusIcon></PlusIcon>

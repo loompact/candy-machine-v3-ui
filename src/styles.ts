@@ -21,7 +21,7 @@ export const Container = styled('div')<any>`
   max-width: 1280px;
   margin-right: auto;
   margin-left: auto;
-  padding: 0 32px;
+  padding: 32px;
   display: flex;
   flex-direction: row;
   gap: 96px;
@@ -35,7 +35,7 @@ export const Container = styled('div')<any>`
   }
 
   @media only screen and (max-width: 450px) {
-    padding: 0 16px;
+    padding: 16px;
     width: auto;
   }
 `;
@@ -44,7 +44,7 @@ export const Column = styled('div')<any>`
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  gap: 64px;
+  gap: 10px;
   width: 100%;
   height: 100%;
 
